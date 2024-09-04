@@ -6,9 +6,9 @@ import random
 # Generate the dataset base on size and the flag.
 # size is the size of the array and the values from 1 to size
 # Flags are kept to all false by default.
-def generateData(size ,randomFlag=False, ascending=False, descending=False):
+def generate_data(size, random_flag=False, ascending=False, descending=False):
     # Generates Random numbers in the array according to the size
-    if randomFlag:
+    if random_flag:
         return random.sample(range(1, size + 1), size)
     # Generates ascending numbers in the array according to the size
     if ascending:
@@ -23,20 +23,20 @@ def generateData(size ,randomFlag=False, ascending=False, descending=False):
             temp.append(i)
         return list(temp) # list() is used to decouple the array for a deepcopy
 
-def sortRunner(arr, mergeFlag = False, arrayType = 0):
+def sort_runner(arr, mergeFlag = False, arrayType = 0):
     type = ""
-    arrayDataType = ""
+    array_data_type = ""
 
     #flags to determine which data type it is sorting.
     if arrayType == 1:
-        arrayDataType = "random"
+        array_data_type = "random"
     elif arrayType == 2 :
-        arrayDataType = "ascending"
+        array_data_type = "ascending"
     else:
-        arrayDataType = "descending"
+        array_data_type = "descending"
     sorted = []
 
-    print(arrayDataType + " before: ", arr)
+    print(array_data_type + " before: ", arr)
     start_time = time.process_time() #start the timer
     if mergeFlag:
         type = "merge sort"
@@ -49,7 +49,7 @@ def sortRunner(arr, mergeFlag = False, arrayType = 0):
     #Print out the proper result
     print(type + " time: ", end_time - start_time)
     if mergeFlag:
-        print(arrayDataType + " after sorted: ", sorted)
+        print(array_data_type + " after sorted: ", sorted)
         print("Number of operations: ", getMergeN())
     else:
         print(type + " after sorted: ", arr)
@@ -61,22 +61,22 @@ if __name__ == '__main__':
     size = 350 #Size of the array and values from 1 to size
 
     # Generate all the array dataset according to the flag ie. Random, ascending, descending
-    arrayRandom = generateData(size, randomFlag=True)
-    arrayAscending = generateData(size, ascending=True)
-    arrayDescending = generateData(size, descending=True)
+    arrayRandom = generate_data(size, random_flag=True)
+    arrayAscending = generate_data(size, ascending=True)
+    arrayDescending = generate_data(size, descending=True)
 
-    arrayRandomQuick = generateData(size, randomFlag=True)
-    arrayAscendingQuick = generateData(size, ascending=True)
-    arrayDescendingQuick = generateData(size, descending=True)
+    arrayRandomQuick = generate_data(size, random_flag=True)
+    arrayAscendingQuick = generate_data(size, ascending=True)
+    arrayDescendingQuick = generate_data(size, descending=True)
 
     # Run the Sorter for each type of the array for merge and quick sort
-    sortRunner(arrayRandom, mergeFlag=True, arrayType=1)
-    sortRunner(arrayAscending, mergeFlag=True, arrayType=2)
-    sortRunner(arrayDescending, mergeFlag=True, arrayType=3)
+    sort_runner(arrayRandom, mergeFlag=True, arrayType=1)
+    sort_runner(arrayAscending, mergeFlag=True, arrayType=2)
+    sort_runner(arrayDescending, mergeFlag=True, arrayType=3)
 
-    sortRunner(arrayRandomQuick, mergeFlag=False, arrayType=1)
-    sortRunner(arrayAscendingQuick, mergeFlag=False, arrayType=2)
-    sortRunner(arrayDescendingQuick, mergeFlag=False, arrayType=3)
+    sort_runner(arrayRandomQuick, mergeFlag=False, arrayType=1)
+    sort_runner(arrayAscendingQuick, mergeFlag=False, arrayType=2)
+    sort_runner(arrayDescendingQuick, mergeFlag=False, arrayType=3)
 
 
 
