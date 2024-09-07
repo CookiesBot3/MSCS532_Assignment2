@@ -2,6 +2,7 @@ from mergeSort import mergeSort, getMergeN
 from quickSort import quickSort, getQuickN
 import time
 import random
+import tracemalloc
 
 # Generate the dataset base on size and the flag.
 # size is the size of the array and the values from 1 to size
@@ -38,6 +39,7 @@ def sort_runner(arr, mergeFlag = False, arrayType = 0):
 
     print(array_data_type + " before: ", arr)
     start_time = time.process_time() #start the timer
+    tracemalloc.start()
     if mergeFlag:
         type = "merge sort"
         sorted = mergeSort(arr)# sort dataset
@@ -45,9 +47,11 @@ def sort_runner(arr, mergeFlag = False, arrayType = 0):
         type = "quick sort"
         quickSort(arr)# sort in place
     end_time = time.process_time() #end the timer
-
+    first_size, first_peak = tracemalloc.get_traced_memory()
     #Print out the proper result
     print(type + " time: ", end_time - start_time)
+    print(type + ": " f"{first_size=}, {first_peak=}")
+    tracemalloc.reset_peak()
     if mergeFlag:
         print(array_data_type + " after sorted: ", sorted)
         print("Number of operations: ", getMergeN())
@@ -58,7 +62,7 @@ def sort_runner(arr, mergeFlag = False, arrayType = 0):
     print('\n')
 
 if __name__ == '__main__':
-    size = 350 #Size of the array and values from 1 to size
+    size = 250#Size of the array and values from 1 to size
 
     # Generate all the array dataset according to the flag ie. Random, ascending, descending
     arrayRandom = generate_data(size, random_flag=True)
